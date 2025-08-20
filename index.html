@@ -20,6 +20,30 @@
       letter-spacing: .1em;
       animation: typing 4s steps(40, end), blink .75s step-end infinite;
     }
+    .slide img {
+      max-height: 350px;
+      object-fit: contain;
+      background: #222;
+      padding: 12px;
+      width: 100%;
+      transition: transform 0.3s;
+    }
+    .slide img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 32px 0 rgba(0,255,204,0.3);
+    }
+    .gallery-img {
+      max-height: 220px;
+      object-fit: contain;
+      background: #222;
+      padding: 10px;
+      width: 100%;
+      transition: transform 0.3s;
+    }
+    .gallery-img:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px 0 rgba(0,255,204,0.2);
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-white font-sans">
@@ -32,35 +56,41 @@
   <p class="mt-4 text-lg text-gray-300">- By Ujjwal Kumar Singh IX A, Roll- 30</p>
 </div>
 
-<!-- Slideshow -->
+<!-- Slideshow with controls -->
 <div class="max-w-4xl mx-auto mt-20 text-center">
-  <div class="slideshow">
+  <div class="slideshow relative">
     <div class="slide hidden">
-      <img class="rounded-2xl shadow-lg" src="far/hubble-space-telescope-in-deep-space-orbital-space-observatory-stars-and-galaxies-research.png">
-      <p class="mt-4">Hubble Space Telescope - capturing deep space wonders.</p>
+      <img class="rounded-2xl shadow-lg" src="far/hubble-space-telescope-in-deep-space-orbital-space-observatory-stars-and-galaxies-research.png" alt="Hubble Space Telescope">
+      <p class="mt-4 text-lg font-semibold">Hubble Space Telescope</p>
+      <p class="text-gray-300">Capturing deep space wonders and expanding our understanding of the universe since 1990.</p>
     </div>
     <div class="slide hidden">
-      <img class="rounded-2xl shadow-lg" src="far/international-space-station.png">
-      <p class="mt-4">International Space Station - a hub for astronauts in orbit.</p>
+      <img class="rounded-2xl shadow-lg" src="far/international-space-station.png" alt="International Space Station">
+      <p class="mt-4 text-lg font-semibold">International Space Station</p>
+      <p class="text-gray-300">A collaborative hub for astronauts, conducting research and experiments in microgravity.</p>
     </div>
     <div class="slide hidden">
-      <img class="rounded-2xl shadow-lg" src="far/Meteosat_Third_Generation_weather_satellites_card_medium.png">
-      <p class="mt-4">Weather Satellite - monitoring Earth's climate and storms.</p>
+      <img class="rounded-2xl shadow-lg" src="far/Meteosat_Third_Generation_weather_satellites_card_medium.png" alt="Weather Satellite">
+      <p class="mt-4 text-lg font-semibold">Meteosat Third Generation</p>
+      <p class="text-gray-300">Advanced weather satellite monitoring Earth's climate, storms, and atmospheric changes.</p>
     </div>
+    <!-- Slideshow controls -->
+    <button id="prevSlide" class="absolute left-0 top-1/2 -translate-y-1/2 bg-teal-500 bg-opacity-70 hover:bg-opacity-100 text-white px-3 py-2 rounded-full shadow-lg z-10">&#8592;</button>
+    <button id="nextSlide" class="absolute right-0 top-1/2 -translate-y-1/2 bg-teal-500 bg-opacity-70 hover:bg-opacity-100 text-white px-3 py-2 rounded-full shadow-lg z-10">&#8594;</button>
   </div>
 </div>
 
-<!-- Dashboard -->
+<!-- Dashboard with more features -->
 <div class="max-w-5xl mx-auto my-16 p-8 bg-gray-800 rounded-2xl shadow-xl">
   <h2 class="text-3xl font-bold text-center mb-8 text-teal-400">Satellite Dashboard (Demo Data)</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     <div class="bg-gray-700 p-6 rounded-xl text-center">
       <h3 class="text-xl font-semibold">Satellite Name</h3>
-      <p class="mt-2"></p>
+      <p class="mt-2 font-mono text-teal-300">INSAT-3DR</p>
     </div>
     <div class="bg-gray-700 p-6 rounded-xl text-center">
       <h3 class="text-xl font-semibold">Orbit Height</h3>
-      <p class="mt-2">36,000 km</p>
+      <p class="mt-2">36,000 km (Geostationary)</p>
     </div>
     <div class="bg-gray-700 p-6 rounded-xl text-center">
       <h3 class="text-xl font-semibold">Status</h3>
@@ -70,17 +100,56 @@
       <h3 class="text-xl font-semibold">Data Collected</h3>
       <p class="mt-2">Weather, Cyclones, Communication</p>
     </div>
+    <div class="bg-gray-700 p-6 rounded-xl text-center">
+      <h3 class="text-xl font-semibold">Launch Date</h3>
+      <p class="mt-2">8 September 2016</p>
+    </div>
+    <div class="bg-gray-700 p-6 rounded-xl text-center">
+      <h3 class="text-xl font-semibold">Country</h3>
+      <p class="mt-2">India</p>
+    </div>
+  </div>
+  <!-- Progress bar for data transmission -->
+  <div class="mt-8">
+    <h4 class="text-lg font-semibold mb-2">Data Transmission Progress</h4>
+    <div class="w-full bg-gray-600 rounded-full h-4">
+      <div class="bg-teal-400 h-4 rounded-full" style="width: 85%;" id="progressBar"></div>
+    </div>
+    <p class="text-right text-sm text-gray-400 mt-1">85% Complete</p>
   </div>
 </div>
 
-<!-- Extra Image Gallery -->
+<!-- Extra Image Gallery with descriptions -->
 <div class="max-w-5xl mx-auto mb-20">
   <h2 class="text-2xl text-center font-bold text-teal-300 mb-6">More Satellite Images</h2>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <img class="rounded-xl shadow-lg" src="envisat_auto35-jpeg.jpg">
-    <img class="rounded-xl shadow-lg" src="gsat10d.jpg">
-    <img class="rounded-xl shadow-lg" src="download.jpg">
+    <div class="bg-gray-800 rounded-xl shadow-lg p-4 flex flex-col items-center">
+      <img class="gallery-img rounded-lg" src="envisat_auto35-jpeg.jpg" alt="Envisat">
+      <p class="mt-3 font-semibold">Envisat</p>
+      <p class="text-gray-400 text-sm text-center">European Earth observation satellite for environmental monitoring.</p>
+    </div>
+    <div class="bg-gray-800 rounded-xl shadow-lg p-4 flex flex-col items-center">
+      <img class="gallery-img rounded-lg" src="gsat10d.jpg" alt="GSAT-10">
+      <p class="mt-3 font-semibold">GSAT-10</p>
+      <p class="text-gray-400 text-sm text-center">Indian communication satellite enhancing telecommunication and navigation.</p>
+    </div>
+    <div class="bg-gray-800 rounded-xl shadow-lg p-4 flex flex-col items-center">
+      <img class="gallery-img rounded-lg" src="download.jpg" alt="NOAA Satellite">
+      <p class="mt-3 font-semibold">NOAA Satellite</p>
+      <p class="text-gray-400 text-sm text-center">US weather satellite for climate and environmental data collection.</p>
+    </div>
   </div>
+</div>
+
+<!-- Fun Facts Section -->
+<div class="max-w-4xl mx-auto mb-16 p-8 bg-gray-800 rounded-2xl shadow-xl">
+  <h2 class="text-2xl font-bold text-teal-300 mb-4 text-center">Did You Know?</h2>
+  <ul class="list-disc list-inside text-gray-300 space-y-2">
+    <li>There are over 3,300 active satellites orbiting Earth as of 2024.</li>
+    <li>The first artificial satellite, Sputnik 1, was launched by the Soviet Union in 1957.</li>
+    <li>Satellites help us with GPS, weather forecasting, TV broadcasting, and disaster management.</li>
+    <li>Some satellites travel at speeds over 28,000 km/h!</li>
+  </ul>
 </div>
 
 <script>
@@ -89,20 +158,60 @@
     document.getElementById('splash').style.display = 'none';
   }, 6000);
 
-  // Slideshow
+  // Slideshow with controls
   let slideIndex = 0;
-  showSlides();
+  let slides = document.getElementsByClassName("slide");
+  let slideInterval = null;
 
-  function showSlides() {
-    let slides = document.getElementsByClassName("slide");
+  function showSlides(n) {
     for (let i = 0; i < slides.length; i++) {
       slides[i].classList.add("hidden");
     }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].classList.remove("hidden");
-    setTimeout(showSlides, 3000);
+    slideIndex = n;
+    if (slideIndex >= slides.length) slideIndex = 0;
+    if (slideIndex < 0) slideIndex = slides.length - 1;
+    slides[slideIndex].classList.remove("hidden");
   }
+
+  function nextSlide() {
+    showSlides(slideIndex + 1);
+  }
+
+  function prevSlide() {
+    showSlides(slideIndex - 1);
+  }
+
+  function autoSlide() {
+    nextSlide();
+    slideInterval = setTimeout(autoSlide, 3000);
+  }
+
+  document.getElementById('prevSlide').onclick = function() {
+    clearTimeout(slideInterval);
+    prevSlide();
+    slideInterval = setTimeout(autoSlide, 3000);
+  };
+  document.getElementById('nextSlide').onclick = function() {
+    clearTimeout(slideInterval);
+    nextSlide();
+    slideInterval = setTimeout(autoSlide, 3000);
+  };
+
+  // Initialize slideshow
+  showSlides(0);
+  slideInterval = setTimeout(autoSlide, 3000);
+
+  // Animate progress bar
+  let progress = 0;
+  let progressBar = document.getElementById('progressBar');
+  function animateProgress() {
+    if (progress < 85) {
+      progress++;
+      progressBar.style.width = progress + "%";
+      setTimeout(animateProgress, 20);
+    }
+  }
+  animateProgress();
 </script>
 
 </body>
